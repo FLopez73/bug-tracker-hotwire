@@ -64,5 +64,6 @@ group :development do
   # gem "spring"
 end
 
+gem 'rack-cors', :require => 'rack/cors'
 
 gem "rspec-rails", "~> 6.0"
