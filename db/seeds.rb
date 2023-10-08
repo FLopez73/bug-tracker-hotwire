@@ -1,27 +1,27 @@
 bugs = [
     {
      description: 'broken link',
-     prority: 'High',
+     priority: 'High',
      assignee: 'Ben'   
     },
     {
      description: 'slow response time',
-     prority: 'Low',
+     priority: 'Low',
      assignee: 'Borja'   
     },
     {
      description: 'button not redirecting to correct page',
-     prority: 'High',
+     priority: 'High',
      assignee: 'Tom'   
     },
     {
      description: 'incorrect data being displayed',
-     prority: 'Medium',
+     priority: 'Medium',
      assignee: 'Steve'   
     },
     {
      description: 'mobile device design not being responsive',
-     prority: 'High',
+     priority: 'High',
      assignee: 'Cathy'   
     },
 ]
