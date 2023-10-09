@@ -5,7 +5,7 @@ RSpec.describe "Bugs", type: :request do
     it "gets a list of bugs" do
       Bug.create(
         description: 'broken link',
-        prority: 'High',
+        priority: 'High',
         assignee: 'Ben'   
       )
 
@@ -23,7 +23,7 @@ RSpec.describe "Bugs", type: :request do
       bug_params = {
         bug: {
           description: 'slow response time',
-          prority: 'Low',
+          priority: 'Low',
           assignee: 'Borja' 
         }
       }
