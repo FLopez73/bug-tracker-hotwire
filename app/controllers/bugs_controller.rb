@@ -10,6 +10,12 @@ class BugsController < ApplicationController
     render json: bug
  end
 
+ def update 
+   bug = Buf.find(params[:id])
+   bug.update(bug_params)
+
+ def destroy 
+   bug = Bug.find(params[:id]) 
 
  private
  def bug_params
