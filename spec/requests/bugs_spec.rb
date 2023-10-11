@@ -65,3 +65,29 @@ RSpec.describe "Bugs", type: :request do
     end
   end
     
+    describe "DELETE/destroy" do 
+      it "deletes existing bug" do 
+        bug = Bug.first 
+        bug_params = {
+          bug: {
+          description: 'site crashing',
+          priority: 'High',
+          assignee: 'Steve' 
+        }
+      }
+      post '/bugs', params: bug_params
+        bug = Bug.first 
+        delete_params = {
+          bug: {
+          description: 'site crashing',
+          priority: 'High',
+          assignee: 'Steve' 
+        }
+      }
+      delete "/bugs/#{bug.id}", params: delete_params
+      expect(response).to have_http_status(204)
+      expect(Bug.exists?(bug.id)).to be_falsy
+     end
+   end
+
+   describe "cannot update a cat without valid attributes"
