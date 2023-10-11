@@ -7,15 +7,32 @@ class BugsController < ApplicationController
 
  def create 
     bug = Bug.create(bug_params)
+    if bug.valid? 
     render json: bug
+    else 
+      render json: bug.errors, status: 422
+    end
  end
 
  def update 
    bug = Buf.find(params[:id])
    bug.update(bug_params)
+   if bug.valid?
+      render json: bug
+   else 
+      render json: bug.errors, status:422 
+   end
+ end
 
  def destroy 
-   bug = Bug.find(params[:id]) 
+   bug = Bug.find(params[:id])
+   if bug.destroy 
+      render json: bug
+   else 
+      render json: errors
+
+   end
+ end 
 
  private
  def bug_params
