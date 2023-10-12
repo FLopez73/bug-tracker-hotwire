@@ -31,7 +31,7 @@ class BugsController < ApplicationController
    else 
       render json: bug.errors
 
-   end
+    end
  end 
 
  private

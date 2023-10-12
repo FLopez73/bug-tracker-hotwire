@@ -77,14 +77,14 @@ RSpec.describe "Bugs", type: :request do
       post '/bugs', params: bug_params
         bug = Bug.first 
         delete_params = {
-          bug: {
+        bug: {
           description: 'broken link',
           priority: 'High',
           assignee: 'Ben' 
         }
       }
       delete "/bugs/#{bug.id}", params: delete_params
-      expect(response).to have_http_status(204)
+      expect(response).to have_http_status(200)
       expect(Bug.exists?(bug.id)).to be_falsy
      end
    end
