@@ -15,7 +15,7 @@ class BugsController < ApplicationController
  end
 
  def update 
-   bug = Buf.find(params[:id])
+   bug = Bug.find(params[:id])
    bug.update(bug_params)
    if bug.valid?
       render json: bug
@@ -29,7 +29,7 @@ class BugsController < ApplicationController
    if bug.destroy 
       render json: bug
    else 
-      render json: errors
+      render json: bug.errors
 
    end
  end 
