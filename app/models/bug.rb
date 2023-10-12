@@ -1,3 +1,3 @@
 class Bug < ApplicationRecord
-    validates :description, presence:true
+    validates :description, :priority, :assignee, presence:true
 end
