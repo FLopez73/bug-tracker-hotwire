@@ -57,8 +57,8 @@ RSpec.describe "Bugs", type: :request do
           assignee: 'Steve' 
         }
       }
-      patch "/bugs/#{big.id}", params: bug_params
-      expected(response).to have_http_status(200)
+      patch "/bugs/#{bug.id}", params: update_params
+      expect(response).to have_http_status(200)
       new_bug = Bug.first
       expect(new_bug.assignee).to eq "Steve"
     
@@ -66,22 +66,21 @@ RSpec.describe "Bugs", type: :request do
   end
     
     describe "DELETE/destroy" do 
-      it "deletes existing bug" do 
-        bug = Bug.first 
+      it "deletes existing bug" do  
         bug_params = {
           bug: {
-          description: 'site crashing',
+          description: 'broken link',
           priority: 'High',
-          assignee: 'Steve' 
+          assignee: 'Ben' 
         }
       }
       post '/bugs', params: bug_params
         bug = Bug.first 
         delete_params = {
           bug: {
-          description: 'site crashing',
+          description: 'broken link',
           priority: 'High',
-          assignee: 'Steve' 
+          assignee: 'Ben' 
         }
       }
       delete "/bugs/#{bug.id}", params: delete_params
@@ -90,4 +89,30 @@ RSpec.describe "Bugs", type: :request do
      end
    end
 
-   describe "cannot update a cat without valid attributes"
+   describe "cannot update a cat without valid attributes" do
+    it "cannot update a bug without a description" do
+      bug = Bug.first 
+        bug_params = {
+          bug: {
+          description: 'broken link',
+          priority: 'High',
+          assignee: 'Steve' 
+        }
+      }
+      post '/bugs', params: bug_params 
+      bug = Bug.first 
+      update_params = {
+        bug: {
+        description: '',
+        priority: 'High',
+        assignee: 'Steve' 
+      }
+    }
+    patch "/bugs/#{bug.id}", params: update_params
+    bug = JSON.parse(response.body)
+    expect(response).to have_http_status(422)
+    expect(bug['description']).to include "can't be blank"
+
+  end 
+ end
+end

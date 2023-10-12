@@ -9,7 +9,7 @@ RSpec.describe Bug, type: :model do
   bug = Bug.create description:'broken link', assignee: 'Tom'
   expect(bug.errors[:priority]).to_not be_empty
  end
-  it "should have a priority" do
+  it "should have a assignee" do
   bug = Bug.create description:'broken link', priority:'high'
   expect(bug.errors[:assignee]).to_not be_empty
  end
