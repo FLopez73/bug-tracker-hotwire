@@ -6,7 +6,6 @@ class BugsController < ApplicationController
     respond_to do |format|
       format.html
       format.turbo_stream
-      format.json { render json: @bugs}
  end
 end
 
@@ -16,36 +15,42 @@ end
       if @bug.save
         format.turbo_stream
         format.html { redirect_to bugs_path, notice: 'Bug was successfully created.' }
-        format.json { render :show, status: :created, location; @bug }
     else 
+         format.turbo_stream { render :new, status: :unprocessable_entity }
+         format.html { render :new, status: :unprocessable_entity }
+      end 
+     end
+   end
+         
       
-      render json: bug.errors, status: 422
-    end
- end
 
  def update 
-   bug = Bug.find(params[:id])
-   bug.update(bug_params)
-   if bug.valid?
-      render json: bug
+   respond_to do |format|
+   if @bug.update(bug_params)
+    format.turbo_stream
+    format.html { redirect_to bugs_path, notice: 'Bug was successfully updated' }
    else 
-      render json: bug.errors, status:422 
+    format.turbo_stream { render :edit, status: :unprocessable_entity }
+    format.html { render :edit, status: :unprocessable_entity }   
+    end
    end
  end
 
  def destroy 
-   bug = Bug.find(params[:id])
-   if bug.destroy 
-      render json: bug
-   else 
-      render json: bug.errors
-
+   @bug.destroy
+   respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to bugs_path, notice: 'Bug was successfully deleted'}
     end
  end 
 
  private
- def bug_params
-    params.require(:bug).permit(:description, :priority, :assignee)
- end
+  def set_bug
+    @bug = Bug.find(params[:id])
+  end
+
+  def bug_params
+     params.require(:bug).permit(:description, :priority, :assignee)
+  end
 
 end
