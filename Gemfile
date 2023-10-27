@@ -67,3 +67,6 @@ end
 gem 'rack-cors', :require => 'rack/cors'
 
 gem "rspec-rails", "~> 6.0"
+
+gem 'webpacker', '~> 5.0'
+
