@@ -1,4 +1,10 @@
-<h2><%= bug.title %></h2>
-<p><strong>Description:</strong> <%= bug.description %></p>
-<p><strong>Priority:</strong> <%= bug.priority %></p>
-<p><strong>Assignee:</strong> <%= bug.assignee %></p>
+
+<div id="<%= dom_id(bug) %>">
+  <p><strong>Description:</strong> <%= bug.description %></p>
+  <p><strong>Priority:</strong> <%= bug.priority %></p>
+  <p><strong>Assignee:</strong> <%= bug.assignee %></p>
+
+  <%= link_to 'Edit', edit_bug_path(bug), class: 'btn btn-primary' %>
+  <%= link_to 'Delete', bug, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+</div>
+
